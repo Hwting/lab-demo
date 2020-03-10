@@ -9,7 +9,7 @@ contexts:
     cluster: dev-k8s-cluster
     user: user-wmnl5
   name: dev-k8s-cluster
-current-context: dev-k8s-cluster-dev-k8s-m1
+current-context: dev-k8s-cluster
 kind: Config
 preferences: {}
 users:
