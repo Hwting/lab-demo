@@ -1,7 +1,34 @@
+apiVersion: extensions/v1beta1  
+kind: Ingress  
+metadata:  
+  name: AppNmae
+spec:  
+  rules:  
+  - host: test.k8s.idcsec.com
+      paths:  
+      - path: /  
+        backend:  
+          serviceName:  AppNmae
+          servicePort: 80 
+---
+kind: Service  
+apiVersion: v1  
+metadata:  
+  labels:  
+      app:  AppNmae  
+  name:  AppNmae
+spec:  
+  ports:  
+  - port: 80  
+    targetPort: 8080
+    name: web    
+  selector:
+    app:  AppNmae
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  app-demo
+  name:  AppNmae
   labels:
     version: v1
 spec:
@@ -13,16 +40,16 @@ spec:
       maxUnavailable: 25%
   selector:
     matchLabels:
-      app:  app-demo
+      app:  AppNmae
   template:
     metadata:
       labels:
-        app:  app-demo
+        app:  AppNmae
         version: v1
     spec:
       containers:
-      - name:  app-demo
-        image: sudo docker pull registry.cn-hangzhou.aliyuncs.com/lab_wt/app-demo:v1
+      - name:  AppNmae
+        image: IMAGE_NAME
         ports:
         - containerPort: 8080
 #      imagePullSecrets:

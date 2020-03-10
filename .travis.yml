@@ -15,6 +15,9 @@ before_install:
     - docker build -t $IMAGE_NAME .
     - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin  registry.cn-hangzhou.aliyuncs.com
     - docker push $IMAGE_NAME
+before_install:
+    -  sed -i -e 's|AppNmae|'"${AppNmae}"'|g' deployment.yaml
+    -  sed -i -e 's|IMAGE_NAME|'"${IMAGE_NAME}"'|g' deployment.yaml
 before_script:
    - mkdir ${HOME}/.kube
    - cp ${TRAVIS_BUILD_DIR}/k8s/config ${HOME}/.kube/config
@@ -26,5 +29,5 @@ before_script:
    #- sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' config
    - sed -i -e 's|Token|'"${Token}"'|g' config
    #- kubectl --kubeconfig config set image deployment/${AppNmae} ${AppNmae}=${IMAGE_NAME}
-   - kubectl --kubeconfig apply -f  ${TRAVIS_BUILD_DIR}/k8s/
-   - kubectl   cluster-info 
+   - kubectl   apply -f  ${TRAVIS_BUILD_DIR}/k8s/
+   - kubectl   get pod | grep  ${AppNmae}
