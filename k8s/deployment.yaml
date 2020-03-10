@@ -5,6 +5,7 @@ metadata:
 spec:  
   rules:  
   - host: test.k8s.idcsec.com
+    http:
       paths:  
       - path: /  
         backend:  
