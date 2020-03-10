@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1  
+kind: Ingress  
+metadata:  
+  name: app-demo
+spec:  
+  rules:  
+  - host: test.demo.idcsec.com
+      paths:  
+      - path: /  
+        backend:  
+          serviceName:  app-demo
+          servicePort: 80

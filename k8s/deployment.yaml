@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  app-demo
+  labels:
+    version: v1
+spec:
+  replicas: 1
+  strategy:  
+    type: RollingUpdate  
+    rollingUpdate:  
+      maxSurge: 25%  
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app:  app-demo
+  template:
+    metadata:
+      labels:
+        app:  app-demo
+        version: v1
+    spec:
+      containers:
+      - name:  app-demo
+        image: harbor.mshare.cn/public/ app-demo-web:v1 
+        ports:
+        - containerPort: 8080
+#      imagePullSecrets:
+#      - name: reg-ip-99 
