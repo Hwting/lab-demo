@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name:  app-demo
-        image: harbor.mshare.cn/public/ app-demo-web:v1 
+        image: sudo docker pull registry.cn-hangzhou.aliyuncs.com/lab_wt/app-demo:v1
         ports:
         - containerPort: 8080
 #      imagePullSecrets:
