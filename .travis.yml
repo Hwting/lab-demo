@@ -11,8 +11,7 @@ env:
     - IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/$PROJECT_ID/$AppNmae:$TAG
     - TRAVIS_SECURE_ENV_VARS=true
 before_install:
-    - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.13.5/bin/linux/amd64/kubectl && \
-      chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+    - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.13.5/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
     - docker build -t $IMAGE_NAME .
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin  registry.cn-hangzhou.aliyuncs.com
     - docker push $IMAGE_NAME
@@ -27,5 +26,5 @@ before_script:
    #- sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' config
    - sed -i -e 's|Token|'"${Token}"'|g' config
    #- kubectl --kubeconfig config set image deployment/$AppNmae $AppNmae=$IMAGE_NAME
-   - kubectl --kubeconfig apply -f ./k8s/*
+   - kubectl --kubeconfig apply -f /k8s/
    - kubectl   cluster-info 
