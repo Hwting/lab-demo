@@ -22,8 +22,10 @@ before_script:
    - cd ${HOME}/.kube
    - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' config
    - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' config
-   - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' config
-   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' config
-   - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' config
+   #- sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' config
+   #- sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' config
+   #- sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' config
+   - sed -i -e 's|Token|'"${Token}"'|g' config
    #- kubectl --kubeconfig config set image deployment/$AppNmae $AppNmae=$IMAGE_NAME
    - kubectl --kubeconfig apply -f ./k8s/*
+   - kubectl   cluster-info 
