@@ -16,8 +16,8 @@ before_install:
     - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin  registry.cn-hangzhou.aliyuncs.com
     - docker push $IMAGE_NAME
 before_install:
-    -  sed -i -e 's|AppNmae|'"${AppNmae}"'|g' deployment.yaml
-    -  sed -i -e 's|IMAGE_NAME|'"${IMAGE_NAME}"'|g' deployment.yaml
+    -  sed -i -e 's|AppNmae|'"${AppNmae}"'|g' ${TRAVIS_BUILD_DIR}/k8s/deployment.yaml
+    -  sed -i -e 's|IMAGE_NAME|'"${IMAGE_NAME}"'|g' ${TRAVIS_BUILD_DIR}/k8s/deployment.yaml
 before_script:
    - mkdir ${HOME}/.kube
    - cp ${TRAVIS_BUILD_DIR}/k8s/config ${HOME}/.kube/config
