@@ -8,16 +8,16 @@ env:
     - AppNmae="app-demo"
     - PROJECT_ID="lab_wt"
     - TAG="v2"
-    - IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/$PROJECT_ID/$AppNmae:$TAG
+    - IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/${PROJECT_ID}/${AppNmae}:$TAG
     - TRAVIS_SECURE_ENV_VARS=true
 before_install:
     - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.13.5/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
     - docker build -t $IMAGE_NAME .
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin  registry.cn-hangzhou.aliyuncs.com
+    - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin  registry.cn-hangzhou.aliyuncs.com
     - docker push $IMAGE_NAME
 before_script:
    - mkdir ${HOME}/.kube
-   - cp ./k8s/config.yaml ${HOME}/.kube/config
+   - cp ${TRAVIS_BUILD_DIR}/k8s/config ${HOME}/.kube/config
    - cd ${HOME}/.kube
    - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' config
    - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' config
@@ -25,6 +25,6 @@ before_script:
    #- sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' config
    #- sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' config
    - sed -i -e 's|Token|'"${Token}"'|g' config
-   #- kubectl --kubeconfig config set image deployment/$AppNmae $AppNmae=$IMAGE_NAME
-   - kubectl --kubeconfig apply -f /k8s/
+   #- kubectl --kubeconfig config set image deployment/${AppNmae} ${AppNmae}=${IMAGE_NAME}
+   - kubectl --kubeconfig apply -f  ${TRAVIS_BUILD_DIR}/k8s/
    - kubectl   cluster-info 
