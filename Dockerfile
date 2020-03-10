@@ -1,5 +1,5 @@
 FROM node:carbon
-
+MAINTAINER wang.t <wang.t.nice.gmail.com> 
 # Create app directory
 WORKDIR /app
 
