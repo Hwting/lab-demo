@@ -17,6 +17,7 @@ before_install:
     - docker push $IMAGE_NAME
     -  sed -i -e 's|AppNmae|'"${AppNmae}"'|g' ${TRAVIS_BUILD_DIR}/k8s/deployment.yaml
     -  sed -i -e 's|IMAGE_NAME|'"${IMAGE_NAME}"'|g' ${TRAVIS_BUILD_DIR}/k8s/deployment.yaml
+    -  cat ${TRAVIS_BUILD_DIR}/k8s/deployment.yaml
 before_script:
    - mkdir ${HOME}/.kube
    - cp ${TRAVIS_BUILD_DIR}/k8s/config ${HOME}/.kube/config
@@ -28,5 +29,6 @@ before_script:
    #- sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' config
    - sed -i -e 's|Token|'"${Token}"'|g' config
    #- kubectl --kubeconfig config set image deployment/${AppNmae} ${AppNmae}=${IMAGE_NAME}
+   - cat ${TRAVIS_BUILD_DIR}/k8s/deployment.yaml
    - kubectl   apply -f  ${TRAVIS_BUILD_DIR}/k8s/
    - kubectl   get pod | grep  ${AppNmae}
