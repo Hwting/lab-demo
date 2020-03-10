@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+env:
+    global:
+    - PROJECT_ID="lab_wt"
+    - IMAGE_NAME="app-demo:v2"
+    - FULL_IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/$PROJECT_ID/$AppName
+before_install:
+    - docker build -t registry.cn-hangzhou.aliyuncs.com/$PROJECT_ID/$AppName .
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
