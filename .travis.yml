@@ -6,6 +6,7 @@ env:
     - PROJECT_ID="lab_wt"
     - IMAGE_NAME="app-demo:v2"
     - FULL_IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/$PROJECT_ID/$IMAGE_NAME
+    - TRAVIS_SECURE_ENV_VARS=true
 before_install:
     - docker build -t $FULL_IMAGE_NAME .
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin  registry.cn-hangzhou.aliyuncs.com
