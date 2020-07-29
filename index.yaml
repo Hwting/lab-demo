@@ -1,14 +1,14 @@
 apiVersion: v1
 entries:
-  app-test:
+  test-app:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-07-29T10:44:09.6145799+08:00"
+    created: "2020-07-29T10:59:36.1558115+08:00"
     description: A Helm chart for Kubernetes
-    digest: a555d6c8c062398cf61a40ff90f09dd89e5711e798bea9dddd365efc96381472
-    name: app-test
+    digest: 36b144ea551fb41fba1f53daedce598aaa291552545374f71715cf376e15416d
+    name: test-app
     type: application
     urls:
-    - http://www.idcsec.com/lab-demo/app-test-0.1.0.tgz
+    - http://www.idcsec.com/lab-demo/test-app-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-29T10:44:09.6145799+08:00"
+generated: "2020-07-29T10:59:36.1558115+08:00"
